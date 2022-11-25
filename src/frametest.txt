@@ -1,0 +1,26 @@
+new RewriteFramesIntegration(
+    {
+      // function that takes the frame, applies a transformation, and returns it
+      iteratee: frame => {
+        if (frame.filename) {
+          console.log(frame.filename)
+          //get everything after the final slash
+          const noPathFilename = frame.filename.split("/").pop();
+
+          console.log(noPathFilename)
+    
+          //match with uploaded source map's path
+          const frameFilename = `~/${noPathFilename}`;
+          
+          console.log(frameFilename)
+          
+          //set it and give it back
+          // frame.filename = frameFilename;
+          return frame;
+        }
+    
+        //if there was no filename, return the frame untouched
+        return frame;
+      }
+    }
+  )
